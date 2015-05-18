@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'users#new'
   resources :stores
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

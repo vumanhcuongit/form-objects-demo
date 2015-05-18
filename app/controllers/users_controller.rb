@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    byebug
     @registration = RegistrationForm.new(registration_params)
 
     respond_to do |format|
