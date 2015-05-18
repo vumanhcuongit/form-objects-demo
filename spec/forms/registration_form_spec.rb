@@ -21,9 +21,16 @@ describe RegistrationForm do
     end
 
     context 'invalid fields' do
+      before(:each) do
+        @form = described_class.new({})
+      end
+
+      it 'fails to validate the form' do
+        expect(@form).to be_invalid
+      end
+
       it 'returns false' do
-        form = described_class.new({})
-        expect(form.save).to eql false
+        expect(@form.save).to eql false
       end
     end
   end
