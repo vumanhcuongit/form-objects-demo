@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @registration = RegistrationForm.new
+    # @user = User.new
   end
 
   # GET /users/1/edit
@@ -24,15 +25,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @registration = RegistrationForm.new(registration_params)
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if @registration.save
+        format.html { redirect_to user_path(@registration.user), notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @registration }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,5 +71,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email)
+    end
+
+    def registration_params
+      params.require(:registration).permit(:email, :name, :terms_of_service)
     end
 end

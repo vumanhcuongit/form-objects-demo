@@ -1,0 +1,21 @@
+= form_for @registration, url: users_path, method: :post, as: :registration do |f|
+  - if @registration.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@registration.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @registration.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    %label Email
+    = f.text_field :email, class: 'form-control'
+  .form-group
+    %label Store name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    %label
+      I accept terms and conditions
+    = f.check_box :terms_of_service
+  .form-group
+    = f.submit 'Create', class: 'btn btn-primary'
